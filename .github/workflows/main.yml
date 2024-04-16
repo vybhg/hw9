@@ -3,10 +3,10 @@ name: CI/CD Pipeline
 on:
   push:
     branches:
-      - master
+      - main
   pull_request:
     branches:
-      - master
+      - main
 
 jobs:
   test:
@@ -58,7 +58,7 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           push: true
-          tags: vybh/hw8:${{ github.sha }} # Uses the Git SHA for tagging
+          tags: vybh/hw9:${{ github.sha }} # Uses the Git SHA for tagging
           platforms: linux/amd64,linux/arm64 # Multi-platform support
           cache-from: type=registry,ref=vybh/hw8:cache
           cache-to: type=inline,mode=max
@@ -66,7 +66,7 @@ jobs:
       - name: Scan the Docker image
         uses: aquasecurity/trivy-action@master
         with:
-          image-ref: 'vybh/hw8:${{ github.sha }}'
+          image-ref: 'vybh/hw9:${{ github.sha }}'
           format: 'table'
           exit-code: '1' # Fail the job if vulnerabilities are found
           ignore-unfixed: true
